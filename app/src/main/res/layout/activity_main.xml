@@ -1,87 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="#F3F4F6"
-    android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
     tools:context=".MainActivity">
 
-    <!-- Título -->
-
-    <!-- Campo de cidade -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="🌤️ WeatherApp"
-        android:textColor="#3F51B5"
-        android:textSize="26sp"
-        android:textStyle="bold" />
-
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Digite a cidade">
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editCity"
+        <!-- Nome do App -->
+        <TextView
+            android:id="@+id/text_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WeatherApp"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:gravity="center" />
+
+        <!-- Campo de pesquisa -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#1E1E1E"
+            android:padding="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center">
 
-    <!-- Botão de busca -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBuscar"
-        android:text="Buscar Clima"
-        android:textAllCaps="false"
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#3F51B5"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="12dp"
-        android:padding="12dp"/>
+            <EditText
+                android:id="@+id/edit_city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Digite a cidade"
+                android:textColorHint="#AAAAAA"
+                android:textColor="#FFFFFF"
+                android:background="@android:color/transparent"
+                android:padding="8dp"
+                android:textSize="16sp" />
 
-    <!-- Resultado -->
-    <LinearLayout
-        android:id="@+id/resultLayout"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buscar"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:backgroundTint="#2196F3" />
+        </LinearLayout>
 
+        <!-- RESULTADOS DO CLIMA -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="24dp">
+
+            <!-- Cidade -->
+            <TextView
+                android:id="@+id/text_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recife, PE"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"
+                android:gravity="center" />
+
+            <!-- Temperatura -->
+            <TextView
+                android:id="@+id/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="28°C"
+                android:textColor="#FFFFFF"
+                android:textSize="52sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="32sp"
+                android:autoSizeMaxTextSize="56sp" />
+
+            <!-- Condição -->
+            <TextView
+                android:id="@+id/text_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parcialmente nublado"
+                android:textColor="#B0BEC5"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Ícone -->
+            <ImageView
+                android:id="@+id/image_weather_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_sunny"
+                android:contentDescription="Ícone do clima"
+                android:layout_marginBottom="24dp" />
+        </LinearLayout>
+
+        <!-- Linha divisória -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#333333"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Título da previsão -->
         <TextView
-            android:id="@+id/txtCidade"
-            android:text="Cidade: —"
-            android:textSize="18sp"
-            android:textColor="#333"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Previsão da Semana"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:id="@+id/txtTemperatura"
-            android:text="Temperatura: —"
-            android:textSize="18sp"
-            android:textColor="#333"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <!-- Lista da previsão -->
+        <LinearLayout
+            android:id="@+id/layout_week_forecast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="8dp">
 
-        <TextView
-            android:id="@+id/txtClima"
-            android:text="Clima: —"
-            android:textSize="18sp"
-            android:textColor="#333"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <!-- Dia 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Segunda"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="🌤 30°C / 22°C"
+                    android:textColor="#B0BEC5"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Dia 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Terça"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="🌧 27°C / 21°C"
+                    android:textColor="#B0BEC5"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Dia 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Quarta"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="⛅ 29°C / 23°C"
+                    android:textColor="#B0BEC5"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
-
+</ScrollView>

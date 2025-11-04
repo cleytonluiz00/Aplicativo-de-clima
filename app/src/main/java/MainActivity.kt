@@ -16,18 +16,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editCity = findViewById<EditText>(R.id.editCity)
-        val btnBuscar = findViewById<Button>(R.id.btnBuscar)
-        val txtCidade = findViewById<TextView>(R.id.txtCidade)
-        val txtTemperatura = findViewById<TextView>(R.id.txtTemperatura)
-        val txtClima = findViewById<TextView>(R.id.txtClima)
+        val editCity = findViewById<EditText>(R.id.edit_city)
+        val btnBuscar = findViewById<Button>(R.id.btn_search)
+        val txtCidade = findViewById<TextView>(R.id.text_city)
+        val txtTemperatura = findViewById<TextView>(R.id.text_temperature)
+        val txtClima = findViewById<TextView>(R.id.text_condition)
+        val imageWeatherIcon = findViewById<ImageView>(R.id.image_weather_icon)
 
         btnBuscar.setOnClickListener {
             val city = editCity.text.toString().trim()
             if (city.isEmpty()) {
                 Toast.makeText(this, "Digite o nome de uma cidade!", Toast.LENGTH_SHORT).show()
             } else {
-                buscarClima(city, txtCidade, txtTemperatura, txtClima)
+                buscarClima(city, txtCidade, txtTemperatura, txtClima, imageWeatherIcon)
             }
         }
     }
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
         city: String,
         txtCidade: TextView,
         txtTemperatura: TextView,
-        txtClima: TextView
+        txtClima: TextView,
+        imageWeatherIcon: ImageView
     ) {
         val url =
             "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apikey&units=metric&lang=pt_br"
@@ -69,9 +71,26 @@ class MainActivity : AppCompatActivity() {
                         val cidade = json.getString("name")
 
                         runOnUiThread {
-                            txtCidade.text = "Cidade: $cidade"
-                            txtTemperatura.text = "Temperatura: %.1f°C".format(temperatura)
-                            txtClima.text = "Clima: ${descricao.replaceFirstChar { it.uppercase() }}"
+                            txtCidade.text = cidade
+                            txtTemperatura.text = "%.1f°C".format(temperatura)
+                            txtClima.text = descricao.replaceFirstChar { it.uppercase() }
+
+                            // 🧠 Troca o ícone conforme o clima
+                            when {
+                                descricao.contains("chuva", ignoreCase = true) -> {
+                                    imageWeatherIcon.setImageResource(R.drawable.ic_rain)
+                                }
+                                descricao.contains("nublado", ignoreCase = true) ||
+                                        descricao.contains("nuvem", ignoreCase = true) -> {
+                                    imageWeatherIcon.setImageResource(R.drawable.ic_cloudy)
+                                }
+                                descricao.contains("noite", ignoreCase = true) -> {
+                                    imageWeatherIcon.setImageResource(R.drawable.ic_night)
+                                }
+                                else -> {
+                                    imageWeatherIcon.setImageResource(R.drawable.ic_sunny)
+                                }
+                            }
                         }
 
                     } catch (e: Exception) {
@@ -88,3 +107,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
 }
+
